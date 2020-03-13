@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Dataintegration 5</title>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="cvr.html">CVR</a></li>
+                <li><a href="coord.html">Coords</a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <h1>Coords</h1>
+            
+        <h2 id="name"></h2>
+        <p id="lat"></p>
+        <p id="lng"></p><br>
+
+    </main>
+
+</body>
+<script>
+    'use strict';
+    const $ = function (foo) {
+        return document.getElementById(foo);
+    }
+
+    // Koordinat
+    let coord = new XMLHttpRequest()
+    coord.open("GET", "https://api.opencagedata.com/geocode/v1/json?q=55.49097%2C%209.48090&key=ef370b3b2c1448ff984d4baa16e9c28a&language=da");
+    coord.addEventListener("load", function() {
+    let obj = JSON.parse(coord.responseText);
+
+        let res = obj.results
+        let lat = res[0].annotations.DMS.lat;
+        let lng = res[0].annotations.DMS.lng;
+
+
+        $('lat').innerHTML = 'Latitude: ' + lat;
+        $('lng').innerHTML = 'Longitude: ' + lng;
+
+});
+coord.send();
+</script>
+</html>

@@ -7,10 +7,10 @@ let input = document.querySelector(".input");
 let button = document.querySelector(".submit");
 input.value = "";
 
+// CVR
 let cvr = new XMLHttpRequest()
     cvr.addEventListener("load", function() {
         let obj = JSON.parse(cvr.responseText);
-        //console.log(obj);
 
         let name = obj.name;
         let add = obj.address;
@@ -26,12 +26,12 @@ let cvr = new XMLHttpRequest()
         $('desc').innerHTML = desc;
         $('phone').innerHTML = 'Tlf: ' + phone;
         $('email').innerHTML = 'Email: ' + email;
-
-
 });
-
 button.addEventListener("click", function(){
     cvr.open("GET", "https://cvrapi.dk/api?search=" + input.value + "&country=dk");
- 
     cvr.send();
+    
 });
+
+
+
